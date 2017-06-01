@@ -18,6 +18,16 @@ Don't burden them with:
 
 ---
 
+Dependencies
+
+Just say no!
+
+Especially ActiveSupport!!
+
+`add_development_dependency` OK
+
+---
+
 Approach:
 + Start with scaffolding
 + Remove code/warnings
@@ -53,8 +63,13 @@ Tidy up
 
 ---
 
-## `.gemspec` (not `Gemfile`)
-simple Gemfile:
+Don't add `Gemfile.lock` to version control...
+
+---
+
+Gemspec
+- Use `.gemspec` file
+- minimal Gemfile:
 ```ruby
 source "https://rubygems.org"
 gemspec
@@ -63,30 +78,15 @@ gemspec
 ---
 
 ## Simple, minimal `.files`
-- `bundle gem mygem --test=rspec --no-coc --no-exe --mit`
-- `%x{git ls-files -z}.split("\x0")` # only version controlled files
-  spec.files = repo_files
-    .reject { |f| f.match(%r{^(test|spec|features)/}) } # directories
-    .reject { |f| f.match(%r{.*\.(gem|lock)}) } # file extensions
-    .reject { |f| f.match(%r{(Rakefile)}) } # files
-- Don't add `Gemfile.lock` to version control...
-- ...or ignore it
-
-  repo_files = `git ls-files -z`.split("\x0")
-  spec.files = repo_files
-    .reject { |f| f.match(%r{^(bin|test|vendor)/}) }
-    .reject { |f| f.match(%r{\.(lock)$}) }
-    .reject { |f| f.match(%r{(circle\.yml|Rakefile)}) }
-
-  spec.files = Dir.glob %w[
+- scaffold is to complicated
+- use this instead:
+```
+   spec.files = Dir.glob %w[
     Gemfile
     README.md
     lib/**/*
   ]
-
----
-
-
+```
 
 ---
 
@@ -103,6 +103,7 @@ gemspec
 ---
 
 ## No ActiveSupport!
+- monkey-patch city
 - invites conflict with Rails apps
 - rude to non-Rails apps
 - rarely necessary
@@ -113,33 +114,9 @@ gemspec
 
 ---
 
-## Example: `parameterize`
-
----
-
 ## Example: `delegate`
 - gratutitous!
 - use built-in Forwardable
-
----
-
-## Opt-in dependencies
-- Use *iff* client decides to require
-
-      def with_clipboard_class
-        gem "clipboard", "~> 1.0"
-        require "clipboard"
-        yield Clipboard
-      rescue LoadError
-        # do nothing
-      end
-
-      def foo(short_url)
-        with_clipboard_class do |clipboard_class|
-          clipboard_class.copy(short_url)
-          puts "URL has also been copied to the clipboard."
-        end
-      end
 
 ---
 
