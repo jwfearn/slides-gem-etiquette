@@ -1,4 +1,5 @@
 ## Gem Etiquette
+### Tips for Making Polite Ruby Libraries
 
 #### John Fearnside
 #### jfearnside@avvo.com
@@ -9,15 +10,55 @@ Being polite to your clients
 
 ---
 
-## `.gemspec` (not `Gemfile`)
+Don't burden them with:
+- dependencies
+- confusion
+- baggage
+- surprises
 
 ---
 
-## Cleanup generated files
-- remove tutorial comments
-- remove unneeded code
-- fix any `gem build` warnings
-- replace `.files`
+Approach:
++ Start with scaffolding
++ Remove code/warnings
++ Tidy up what's left
++ Add code
+
+---
+
+Scaffolding
+```
+bundle gem mygem --test=rspec --no-coc --no-exe --no-ext --mit
+```
+---
+
+Warnings
+- Replace placeholder summary
+- Remove `spec.description`
+
+---
+
+Remove
+- private gemserver section
+- spec.bindir
+- spec.executables
+
+---
+
+Tidy up
+- Normal quotes
+- Glob for spec.files
+- Replace placeholder homepage
+- Remove tutorial comments
+
+---
+
+## `.gemspec` (not `Gemfile`)
+simple Gemfile:
+```ruby
+source "https://rubygems.org"
+gemspec
+```
 
 ---
 
@@ -52,7 +93,7 @@ Being polite to your clients
 ## Minimize dependencies
 - less impact on clients
 - `add_development_dependency` is your friend!
-- don't require command line tools
+- don't shell out to command line tools
 - don't require other gems
 
 ---
@@ -64,6 +105,7 @@ Being polite to your clients
 ## No ActiveSupport!
 - invites conflict with Rails apps
 - rude to non-Rails apps
+- rarely necessary
 
 ---
 
