@@ -18,78 +18,6 @@ Don't burden them with:
 
 ---
 
-Dependencies
-
-Just say no!
-
-Especially ActiveSupport!!
-
-`add_development_dependency` OK
-
----
-
-Approach:
-+ Start with scaffolding
-+ Remove code/warnings
-+ Tidy up what's left
-+ Add code
-
----
-
-Scaffolding
-```
-bundle gem mygem --test=rspec --no-coc --no-exe --no-ext --mit
-```
----
-
-Warnings
-- Replace placeholder summary
-- Remove `spec.description`
-
----
-
-Remove
-- private gemserver section
-- spec.bindir
-- spec.executables
-
----
-
-Tidy up
-- Normal quotes
-- Glob for spec.files
-- Replace placeholder homepage
-- Remove tutorial comments
-
----
-
-Don't add `Gemfile.lock` to version control...
-
----
-
-Gemspec
-- Use `.gemspec` file
-- minimal Gemfile:
-```ruby
-source "https://rubygems.org"
-gemspec
-```
-
----
-
-## Simple, minimal `.files`
-- scaffold is to complicated
-- use this instead:
-```
-   spec.files = Dir.glob %w[
-    Gemfile
-    README.md
-    lib/**/*
-  ]
-```
-
----
-
 ## Minimize dependencies
 - less impact on clients
 - `add_development_dependency` is your friend!
@@ -106,17 +34,78 @@ gemspec
 - monkey-patch city
 - invites conflict with Rails apps
 - rude to non-Rails apps
-- rarely necessary
+- not needed (use pure Ruby instead)
 
 ---
 
-## Example: `class_attribute`
+Examples:
+
+| ActiveSupport     | Ruby                    |
+|===================|=========================|
+| `delegate`        | `Forwardable`           |
+| `class_attribute` | class instance variable |
 
 ---
 
-## Example: `delegate`
-- gratutitous!
-- use built-in Forwardable
+## Approach
++ Start with scaffolding
++ Remove code/warnings
++ Tidy up what's left
++ Add code
+
+---
+
+## Scaffolding
+```
+bundle gem mygem --test=rspec --no-coc --no-exe --no-ext --mit
+```
+---
+
+## Warnings
+- Replace placeholder summary
+- Remove `spec.description`
+
+---
+
+## Remove
+- private gemserver section
+- spec.bindir
+- spec.executables
+
+---
+
+## Tidy up
+- Normal quotes
+- Glob for spec.files
+- Replace placeholder homepage
+- Remove tutorial comments
+
+---
+
+Don't add `Gemfile.lock` to version control
+
+---
+
+Gemspec
+- Use `.gemspec` file
+- minimal Gemfile:
+```ruby
+source "https://rubygems.org"
+gemspec
+```
+
+---
+
+## Simple Files
+- scaffolding too complicated
+- use this instead:
+```
+   spec.files = Dir.glob %w[
+    Gemfile
+    README.md
+    lib/**/*
+  ]
+```
 
 ---
 
