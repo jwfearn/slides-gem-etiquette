@@ -56,7 +56,7 @@ Examples:
 ---
 
 ## Scaffolding
-```
+```bash
 bundle gem mygem --test=rspec --no-coc --no-exe --no-ext --mit
 cd mygem
 bundle install
@@ -102,7 +102,7 @@ gemspec
 ## Simple Files
 - scaffolding too complicated
 - use this instead:
-```
+```ruby
    spec.files = Dir.glob %w[
     Gemfile
     README.md
