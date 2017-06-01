@@ -58,6 +58,9 @@ Examples:
 ## Scaffolding
 ```
 bundle gem mygem --test=rspec --no-coc --no-exe --no-ext --mit
+cd mygem
+bundle install
+bundle exec rspec
 ```
 ---
 
