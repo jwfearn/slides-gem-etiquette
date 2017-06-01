@@ -41,7 +41,7 @@ Don't burden them with:
 Examples:
 
 | ActiveSupport     | Ruby                    |
-|===================|=========================|
+| ----------------- | ----------------------- |
 | `delegate`        | `Forwardable`           |
 | `class_attribute` | class instance variable |
 
